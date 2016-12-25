@@ -145,6 +145,23 @@ body{
 	font-weight: bold;
 }
 
+/* Main Content CSS: Preferences */
+
+.content .preference-block{
+	margin-top: 10px;
+	padding: 10px;
+	border: 1px solid;
+	border-radius: 5px;
+}
+
+.preference-block .preference-title{
+	font-weight: bold;
+}
+
+.preference-block .preference-explanation{
+	font-style: italic;
+}
+
 /* Footer CSS */
 
 #footer{
@@ -152,3 +169,5 @@ body{
 	padding-top: 5px;
 	text-align: center;
 }
+
+/* Basic Mobile CSS */

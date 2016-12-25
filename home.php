@@ -33,7 +33,7 @@
 						<div class="name foat-right">
 							<span class="name-dropdown-button"><?php echo $userRow['userName']; ?> (Settings)</span>
 							<ul class="name-dropdown">
-								<a href="#">
+								<a href="preferences.php">
 									<li class="dropdown preferences">
 										Preferences
 									</li>
