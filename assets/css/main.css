@@ -1,0 +1,33 @@
+@import 'reset.css';
+
+#header{
+	height: 50px;
+}
+
+#header-wrapper{
+	width: 90%;
+	margin: 0 auto;
+}
+
+#header .title{
+	font-weight: bold;
+	float: left;
+}
+
+#header .profile{
+	float: right;
+}
+
+#header .picture img{
+	width: 40px;
+}
+
+#header .name{
+	font-weight: bold;
+}
+
+
+
+.clear{
+	clear: both;
+}
