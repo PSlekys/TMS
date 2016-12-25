@@ -1,33 +1,88 @@
 @import 'reset.css';
 
-#header{
-	height: 50px;
+/* General CSS */
+
+.clear{
+	clear: both;
 }
 
+/* Header CSS */
+
 #header-wrapper{
+	height: 50px;
+	border-bottom: 1px solid;
+}
+
+#header{
 	width: 90%;
 	margin: 0 auto;
 }
 
 #header .title{
-	font-weight: bold;
 	float: left;
+	font-weight: bold;
+	font-size: 120%;
+	line-height: 50px;
 }
 
 #header .profile{
 	float: right;
 }
 
+#header .picture{
+	float: left;
+	margin-top: 5px;
+}
+
 #header .picture img{
 	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+	border: 1px solid;
 }
 
 #header .name{
+	float: right;
 	font-weight: bold;
+	line-height: 50px;
+	padding-left: 10px;
 }
 
+/* Main Content CSS */
 
 
-.clear{
-	clear: both;
+.content{
+	width: 90%;
+	margin: 0 auto;
+	padding: 10px 0;
+}
+
+.content .content-title{
+	font-weight: bold;
+	font-size: 110%;
+}
+
+/* Main Content CSS: Individual Task CSS */
+
+.content .task{
+	margin-top: 10px;
+	padding: 5px;
+	border: 1px solid;
+	border-radius: 5px;
+}
+
+.task .keywords{
+	float: left;
+}
+
+.task .points{
+	float: right;
+}
+
+/* Footer CSS */
+
+#footer{
+	border-top: 1px solid;
+	padding-top: 5px;
+	text-align: center;
 }
