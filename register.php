@@ -96,15 +96,7 @@
 		<!-- Header -->
 			<header id="header-wrapper">
 				<div id="header">
-					<h1 class="title">Mozilla Task Management System</h1>
-					<div class="profile">
-						<div class="picture">
-							<img src="assets/images/profile.svg" alt="profile-picture" />
-						</div>
-						<span class="name">Profile Name</span>
-						<div class="clear"></div>
-					</div>
-					<div class="clear"></div>
+					<h1 class="title center">Mozilla Task Management System</h1>
 				</div>
 			</header>
 

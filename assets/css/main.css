@@ -3,12 +3,24 @@
 
 /* General CSS */
 
-.clear{
-	clear: both;
-}
-
 body{
     font-family: 'Roboto', sans-serif;
+}
+
+.center{
+	text-align: center;
+}
+
+.float-left{
+	float: left;
+}
+
+.float-right{
+	float: right;
+}
+
+.clear{
+	clear: both;
 }
 
 /* Header CSS */
@@ -24,18 +36,12 @@ body{
 }
 
 #header .title{
-	float: left;
 	font-weight: bold;
 	font-size: 120%;
 	line-height: 50px;
 }
 
-#header .profile{
-	float: right;
-}
-
 #header .picture{
-	float: left;
 	margin-top: 5px;
 }
 
@@ -47,10 +53,31 @@ body{
 }
 
 #header .name{
-	float: right;
 	font-weight: bold;
 	line-height: 50px;
 	padding-left: 10px;
+	position: relative;
+    display: inline-block;
+}
+
+#header .name-dropdown-button{
+	cursor: pointer;
+}
+
+#header .name-dropdown{
+	display: none;
+    position: absolute;
+	right: 0;
+    background-color: #f9f9f9;
+    min-width: 140px;
+}
+
+#header .dropdown{
+	padding: 10px;
+}
+
+#header .name:hover .name-dropdown{
+	display: block;
 }
 
 /* Main Content CSS */

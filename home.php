@@ -25,13 +25,26 @@
 		<!-- Header -->
 			<header id="header-wrapper">
 				<div id="header">
-					<h1 class="title">Mozilla Task Management System</h1>
-					<div class="profile">
-						<div class="picture">
+					<h1 class="title float-left">Mozilla Task Management System</h1>
+					<div class="profile float-right">
+						<div class="picture float-left">
 							<img src="assets/images/profile.svg" alt="profile-picture" />
 						</div>
-						<span class="name"><?php echo $userRow['userName']; ?> (<?php echo $userRow['userEmail']; ?>).</span>
-						<a href="logout.php?logout">Logout</a>
+						<div class="name foat-right">
+							<span class="name-dropdown-button"><?php echo $userRow['userName']; ?> (Settings)</span>
+							<ul class="name-dropdown">
+								<a href="#">
+									<li class="dropdown preferences">
+										Preferences
+									</li>
+								</a>
+								<a href="logout.php?logout">
+									<li class="dropdown logout">
+										Logout
+									</li>
+								</a>
+							</ul>
+						</div>
 						<div class="clear"></div>
 					</div>
 					<div class="clear"></div>
