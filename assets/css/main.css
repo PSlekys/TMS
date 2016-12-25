@@ -1,9 +1,14 @@
 @import 'reset.css';
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 /* General CSS */
 
 .clear{
 	clear: both;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
 }
 
 /* Header CSS */
@@ -55,28 +60,52 @@
 	width: 90%;
 	margin: 0 auto;
 	padding: 10px 0;
+	min-height: 350px;
 }
 
 .content .content-title{
 	font-weight: bold;
 	font-size: 110%;
+	padding: 5px 0;
 }
 
 /* Main Content CSS: Individual Task CSS */
 
 .content .task{
 	margin-top: 10px;
-	padding: 5px;
+	padding: 10px;
 	border: 1px solid;
 	border-radius: 5px;
+}
+
+.task .title{
+	font-weight: bold;
+}
+
+.task .description{
+	padding: 10px 0; 
 }
 
 .task .keywords{
 	float: left;
 }
 
+.task .keyword{
+	border: 1px solid;
+	margin: 0 2px;
+	padding: 2px;
+}
+
+.task .keyword:first-child{
+	margin-left: 0;
+}
+
 .task .points{
 	float: right;
+}
+
+.task .number-points{
+	font-weight: bold;
 }
 
 /* Footer CSS */
