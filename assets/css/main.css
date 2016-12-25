@@ -69,6 +69,16 @@ body{
 	padding: 5px 0;
 }
 
+.content .content-main-message{
+	font-weight: bold;
+	padding: 5px 0;
+	color: #B22239;
+}
+
+.content .message-success{
+	color: #48B25D;
+}
+
 /* Main Content CSS: Individual Task CSS */
 
 .content .task{

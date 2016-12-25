@@ -1,3 +1,17 @@
+<?php
+	ob_start();
+	session_start();
+	require_once 'dbconnect.php';
+	
+	// if session is not set this will redirect to login page
+	if( !isset($_SESSION['user']) ) {
+		header("Location: index.php");
+		exit;
+	}
+	// select loggedin users detail
+	$res=mysql_query("SELECT * FROM users WHERE userId=".$_SESSION['user']);
+	$userRow=mysql_fetch_array($res);
+?>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -16,7 +30,8 @@
 						<div class="picture">
 							<img src="assets/images/profile.svg" alt="profile-picture" />
 						</div>
-						<span class="name">Profile Name</span>
+						<span class="name"><?php echo $userRow['userName']; ?> (<?php echo $userRow['userEmail']; ?>).</span>
+						<a href="logout.php?logout">Logout</a>
 						<div class="clear"></div>
 					</div>
 					<div class="clear"></div>
@@ -96,3 +111,4 @@
 			</footer>
 	</body>
 </html>
+<?php ob_end_flush(); ?>
