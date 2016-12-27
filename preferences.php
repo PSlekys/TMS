@@ -22,6 +22,11 @@ ob_start();
 						<div class="name foat-right">
 							<span class="name-dropdown-button"><?php echo $userRow['userName']; ?> (Settings)</span>
 							<ul class="name-dropdown">
+								<a href="about.php">
+									<li class="dropdown preferences">
+										About
+									</li>
+								</a>
 								<a href="#">
 									<li class="dropdown preferences">
 										Preferences

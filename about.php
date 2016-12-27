@@ -33,7 +33,7 @@
 						<div class="name foat-right">
 							<span class="name-dropdown-button"><?php echo $userRow['userName']; ?> (Settings)</span>
 							<ul class="name-dropdown">
-								<a href="about.php">
+								<a href="#">
 									<li class="dropdown preferences">
 										About
 									</li>
@@ -63,7 +63,7 @@
 				
 				<div class="content">
 					<h2 class="content-title">
-						We found some tasks for you:
+						Tasks you have accepted:
 					</h2>
 					<div class="task">
 						<h3 class="title">
@@ -87,12 +87,12 @@
 						</span>
 						
 						<span class="points">
-							You will gain: <span class="number-points">500 points!</span>
+							Once completed, you will gain: <span class="number-points">500 points!</span>
 						</span>
 						<div class="clear"></div>
 						
-						<button type="button" class="accept-button" name="Accept">Accepts this task</button>
-						<button type="button" class="ignore-button" name="Ignore">Ignore this task</button>
+						<button type="button" class="completed-button" name="Completed">I have finished the task!</button>
+						<button type="button" class="cancel-button" name="Cancel">Unfortunately, I have to cancel this task</button>
 					</div>
 					
 					<div class="task">
@@ -117,12 +117,12 @@
 						</span>
 						
 						<span class="points">
-							You will gain: <span class="number-points">500 points!</span>
+							Once completed, you will gain: <span class="number-points">500 points!</span>
 						</span>
 						<div class="clear"></div>
 						
-						<button type="button" class="accept-button" name="Accept">Accepts this task</button>
-						<button type="button" class="ignore-button" name="Ignore">Ignore this task</button>
+						<button type="button" class="completed-button" name="Completed">I have finished the task!</button>
+						<button type="button" class="cancel-button" name="Cancel">Unfortunately, I have to cancel this task</button>
 					</div>
 				</div>
 			</div>
