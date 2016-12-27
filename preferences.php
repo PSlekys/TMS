@@ -1,6 +1,6 @@
 <?php
 ob_start();
- ?>
+?>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -39,75 +39,72 @@ ob_start();
 					<div class="clear"></div>
 				</div>
 			</header>
-<?php 
+			
+<?php
 
-if($_POST['Save']=="1"){
-	//echo '<pre>';
-	include('dbconnect.php');
-	unset($_POST['Save']);
-	//print_r($_POST);exit;
-	$name = $_POST['name'];
-	$email = $_POST['email'];
-	$pass = $_POST['pass'];
-	if($_POST['programming-languages']!=""){
-		$programming_languages = implode(',',$_POST['programming-languages']);	
-	}else{
-		$programming_languages = $_POST['programming-languages'];
-	}
-	$programming_languages = implode(',',$_POST['programming-languages']);
-	$leadership = $_POST['leadership'];
-		$pass = $_POST['pass'];
-	$speaking = $_POST['speaking'];
-	$teaching_child = $_POST['teaching'];
-	$code = $_POST['code'];
-	$talk = $_POST['talk'];
-	$teach = $_POST['teach'];	
-	$translating = $_POST['translating'];
-	$organize = $_POST['organize'];
-	$support = $_POST['support'];
-	$testing = $_POST['testing'];
-	$org = $_POST['org'];
-	$id = $_POST['id'];
-  if($pass==""){
-	  		$sql = "UPDATE `users` SET `userName`='$name',`userEmail`='$email',`programming_languages`='$programming_languages',`code`='$code',`speaking`='$speaking',`leadership`='$leadership',`teaching_child`='$teaching_child',`translating`='$translating',`organize`='$organize',`testing`='$testing',`talk`='$talk',`teach`='$teach',`support`='$support',`org`='$org' WHERE userId = '$id'";
-
-  }else{
-	  $pass = hash('sha256', $pass);
-	  		$sql = "UPDATE `users` SET `userName`='$name',`userEmail`='$email',`userPass`='$pass',`programming_languages`='$programming_languages',`code`='$code',`speaking`='$speaking',`leadership`='$leadership',`teaching_child`='$teaching_child',`translating`='$translating',`organize`='$organize',`testing`='$testing',`talk`='$talk',`teach`='$teach',`support`='$support',`org`='$org' WHERE userId = '$id'";
-
-  }
-
-
-if ($conn->query($sql) === TRUE) {
-    echo "Record Update successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+if ($_POST['Save'] == "1") {
+    //echo '<pre>';
+    include('dbconnect.php');
+    unset($_POST['Save']);
+    //print_r($_POST);exit;
+    $name  = $_POST['name'];
+    $email = $_POST['email'];
+    $pass  = $_POST['pass'];
+    if ($_POST['programming-languages'] != "") {
+        $programming_languages = implode(',', $_POST['programming-languages']);
+    } else {
+        $programming_languages = $_POST['programming-languages'];
+    }
+    $programming_languages = implode(',', $_POST['programming-languages']);
+    $leadership            = $_POST['leadership'];
+    $pass                  = $_POST['pass'];
+    $speaking              = $_POST['speaking'];
+    $teaching_child        = $_POST['teaching'];
+    $code                  = $_POST['code'];
+    $talk                  = $_POST['talk'];
+    $teach                 = $_POST['teach'];
+    $translating           = $_POST['translating'];
+    $organize              = $_POST['organize'];
+    $support               = $_POST['support'];
+    $testing               = $_POST['testing'];
+    $org                   = $_POST['org'];
+    $id                    = $_POST['id'];
+    if ($pass == "") {
+        $sql = "UPDATE `users` SET `userName`='$name',`userEmail`='$email',`programming_languages`='$programming_languages',`code`='$code',`speaking`='$speaking',`leadership`='$leadership',`teaching_child`='$teaching_child',`translating`='$translating',`organize`='$organize',`testing`='$testing',`talk`='$talk',`teach`='$teach',`support`='$support',`org`='$org' WHERE userId = '$id'";
+        
+    } else {
+        $pass = hash('sha256', $pass);
+        $sql  = "UPDATE `users` SET `userName`='$name',`userEmail`='$email',`userPass`='$pass',`programming_languages`='$programming_languages',`code`='$code',`speaking`='$speaking',`leadership`='$leadership',`teaching_child`='$teaching_child',`translating`='$translating',`organize`='$organize',`testing`='$testing',`talk`='$talk',`teach`='$teach',`support`='$support',`org`='$org' WHERE userId = '$id'";
+        
+    }
+    
+    if ($conn->query($sql) === TRUE) {
+        echo "Record Update successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    
+    $conn->close();
+    $newURL = 'preferences.php';
+    //header('Location: '.$newURL);   
 }
 
-$conn->close();
-	$newURL = 'preferences.php';
-	//header('Location: '.$newURL);
-	
-}
-
-
-
-
- ?>
- <?php
-	
-	session_start();
-	require_once 'dbconnect.php';
-	
-	// if session is not set this will redirect to login page
-	if( !isset($_SESSION['user']) ) {
-		header("Location: index.php");
-		exit;
-	}
-	// select loggedin users detail
-	$res=mysql_query("SELECT * FROM users WHERE userId=".$_SESSION['user']);
-	$userRow=mysql_fetch_array($res);
 ?>
+<?php
+
+session_start();
+require_once 'dbconnect.php';
+
+// if session is not set this will redirect to login page
+if (!isset($_SESSION['user'])) {
+    header("Location: index.php");
+    exit;
+}
+// select loggedin users detail
+$res     = mysql_query("SELECT * FROM users WHERE userId=" . $_SESSION['user']);
+$userRow = mysql_fetch_array($res);
+?>
+
 		<!-- Main Content -->
 		<form action="" method="post" >
 			<div id="content-wrapper">
@@ -147,22 +144,23 @@ $conn->close();
 						<h4 class="preference-explanation">
 							Tell us what you already know!
 						</h4>
-					<?php
-                    if($userRow['programming_languages']!=""){
-						
-						$lng = array();
-						$sd = $userRow['programming_languages'];
-						//echo $sd;
-						$lng = explode(',',$sd);
-						
-					}else{
-						$lng =array('no');
-						
-					}
-
-					?>	
 						<div class="preference-fields">
 							<div class="preference-form-content form-languages">
+							<?php
+							if ($userRow['programming_languages'] != "") {
+								
+								$lng = array();
+								$sd  = $userRow['programming_languages'];
+								//echo $sd;
+								$lng = explode(',', $sd);
+								
+							} else {
+								$lng = array(
+									'no'
+								);
+								
+							}
+							?>   
 								<label class="preference-form-about" for="programming-languages">What programming languages do you know?</label>
 								<div class="checkbox">
 									<label for="programming-languages-0">
