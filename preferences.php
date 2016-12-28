@@ -257,8 +257,16 @@ $userRow = mysql_fetch_array($res);
 									No
 								</label>
 							</div>
-							
-							[Languages]
+
+							<div class="preference-form-content form-languages">
+								<label class="preference-form-about" for="languages">What languages do you know?</label>
+								<select class="preferences-selection-languages" multiple="">
+									<option value="EN">English</option>
+									<option value="FR">French</option>
+									<option value="LT">Lithuanian</option>
+									<option value="RU">Russian</option>
+								</select>
+							</div>
 							
 						</div>
 					</div>

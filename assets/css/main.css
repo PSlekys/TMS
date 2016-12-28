@@ -115,6 +115,10 @@ body{
 	border-radius: 5px;
 }
 
+.completed-tasks{
+	margin-top: 20px;
+}
+
 .task .title{
 	font-weight: bold;
 }
@@ -143,6 +147,10 @@ body{
 
 .task .number-points{
 	font-weight: bold;
+}
+
+.task .task-buttons{
+	margin-top: 15px;
 }
 
 /* Main Content CSS: Preferences */

@@ -91,8 +91,10 @@
 						</span>
 						<div class="clear"></div>
 						
-						<button type="button" class="accept-button" name="Accept">Accepts this task</button>
-						<button type="button" class="ignore-button" name="Ignore">Ignore this task</button>
+						<div class="task-buttons">
+							<button type="button" class="accept-button" name="Accept">Accepts this task</button>
+							<button type="button" class="ignore-button" name="Ignore">Ignore this task</button>
+						</div>
 					</div>
 					
 					<div class="task">
@@ -121,8 +123,10 @@
 						</span>
 						<div class="clear"></div>
 						
-						<button type="button" class="accept-button" name="Accept">Accepts this task</button>
-						<button type="button" class="ignore-button" name="Ignore">Ignore this task</button>
+						<div class="task-buttons">
+							<button type="button" class="accept-button" name="Accept">Accepts this task</button>
+							<button type="button" class="ignore-button" name="Ignore">Ignore this task</button>
+						</div>
 					</div>
 				</div>
 			</div>
