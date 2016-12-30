@@ -47,6 +47,7 @@
 			
 			if( $count == 1 && $row['userPass']==$password ) {
 				$_SESSION['user'] = $row['userId'];
+				$_SESSION['email'] = $row['userEmail'];
 				header("Location: home.php");
 			} else {
 				$errMSG = "Incorrect Email or Password. Please try again.";

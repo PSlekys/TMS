@@ -1,16 +1,6 @@
 <?php
-	ob_start();
-	session_start();
-	require_once 'dbconnect.php';
-	
-	// if session is not set this will redirect to login page
-	if( !isset($_SESSION['user']) ) {
-		header("Location: index.php");
-		exit;
-	}
-	// select loggedin users detail
-	$res=mysql_query("SELECT * FROM users WHERE userId=".$_SESSION['user']);
-	$userRow=mysql_fetch_array($res);
+include('system.php');
+     
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -65,102 +55,101 @@
 					<h2 class="content-title">
 						Tasks you have accepted:
 					</h2>
-					<div class="task">
-						<h3 class="title">
-							Translation: English to Lithuanian
-						</h3>
-						
-						<p class="description">
-							We need someone to translate a wiki page about Mozilla Firefox updates (80 strings) from English to Lithuanian.
-						</p>
-						
-						<span class="keywords">
-							<span class="keyword">
-								l10n
-							</span>
-							<span class="keyword">
-								English
-							</span>
-							<span class="keyword">
-								Lithuanian
-							</span>
-						</span>
-						
-						<span class="points">
-							Once completed, you will gain: <span class="number-points">500 points!</span>
-						</span>
-						<div class="clear"></div>
-						
-						<div class="task-buttons">
-							<button type="button" class="completed-button" name="Completed">I have finished the task!</button>
-							<button type="button" class="cancel-button" name="Cancel">Unfortunately, I have to cancel this task</button>
-						</div>
-					</div>
 					
+<?php	if ($accepted->num_rows > 0) {
+	
+    // output data of each row
+    while($row = $accepted->fetch_assoc()) {
+	if($row['keywords']!=""){
+		$keywords_arr = explode(',',$row['keywords']);
+	}
+
+
+	?>
 					<div class="task">
 						<h3 class="title">
-							Translation: English to Lithuanian
+							<?php echo $row['name'] ?>
 						</h3>
 						
 						<p class="description">
-							We need someone to translate a wiki page about Mozilla Firefox updates (80 strings) from English to Lithuanian.
+							<?php echo $row['description'] ?>
 						</p>
 						
 						<span class="keywords">
+						<?php foreach($keywords_arr as $key) { ?>
 							<span class="keyword">
-								l10n
+								<?php echo $key ?>
 							</span>
-							<span class="keyword">
-								English
-							</span>
-							<span class="keyword">
-								Lithuanian
-							</span>
+
+						<?php } ?>
 						</span>
 						
 						<span class="points">
-							Once completed, you will gain: <span class="number-points">500 points!</span>
+							You will gain: <span class="number-points"><?php echo $row['point'] ?> points!</span>
 						</span>
 						<div class="clear"></div>
 						
-						<div class="task-buttons">
-							<button type="button" class="completed-button" name="Completed">I have finished the task!</button>
-							<button type="button" class="cancel-button" name="Cancel">Unfortunately, I have to cancel this task</button>
+						<div class="task-buttons"><span class="keyword">
+							<a href="/about.php?para=complete&id=<?php echo $row['id'] ?>" class="completed-button" name="Completed">I have finished the task!</a>
+							</span>
+							<span class="keyword">
+							<a href="/about.php?para=cancel&id=<?php echo $row['id'] ?>" class="cancel-button" name="Cancel">Unfortunately, I have to cancel this task</a>
+							</span>
 						</div>
 					</div>
+<?php }}else{
+	echo 'You have not accpeted any task Yet';
+} ?>
+
 					
 					<div class="completed-tasks">
 						<h2 class="content-title">
 							Tasks you have completed (total points: [number]):
 						</h2>
 						
-						<div class="task">
-							<h3 class="title">
-								Translation: English to Lithuanian
-							</h3>
-							
-							<p class="description">
-								We need someone to translate a wiki page about Mozilla Firefox updates (80 strings) from English to Lithuanian.
-							</p>
-							
-							<span class="keywords">
-								<span class="keyword">
-									l10n
-								</span>
-								<span class="keyword">
-									English
-								</span>
-								<span class="keyword">
-									Lithuanian
-								</span>
+<?php	if ($completed->num_rows > 0) {
+	
+    // output data of each row
+    while($row = $completed->fetch_assoc()) {
+	if($row['keywords']!=""){
+		$keywords_arr = explode(',',$row['keywords']);
+	}
+
+
+	?>
+					<div class="task">
+						<h3 class="title">
+							<?php echo $row['name'] ?>
+						</h3>
+						
+						<p class="description">
+							<?php echo $row['description'] ?>
+						</p>
+						
+						<span class="keywords">
+						<?php foreach($keywords_arr as $key) { ?>
+							<span class="keyword">
+								<?php echo $key ?>
 							</span>
-							
-							<span class="points">
-								Gained: <span class="number-points">500 points!</span>
-							</span>
-							<div class="clear"></div>
-						</div>
+
+						<?php } ?>
+						</span>
+						
+						<span class="points">
+							You will gained: <span class="number-points"><?php echo $row['point'] ?> points!</span>
+						</span>
+						<div class="clear"></div>
+						
+
 					</div>
+<?php }}else{
+	echo 'You have not completed any task Yet';
+} ?>
+
+					</div>
+						<span class="points">
+							Total gained: <span class="number-points"><?php $row = $total->fetch_assoc();echo ($row['total']); ?> points!</span>
+						</span>
 				</div>
 			</div>
 

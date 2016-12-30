@@ -1,16 +1,6 @@
 <?php
-	ob_start();
-	session_start();
-	require_once 'dbconnect.php';
-	
-	// if session is not set this will redirect to login page
-	if( !isset($_SESSION['user']) ) {
-		header("Location: index.php");
-		exit;
-	}
-	// select loggedin users detail
-	$res=mysql_query("SELECT * FROM users WHERE userId=".$_SESSION['user']);
-	$userRow=mysql_fetch_array($res);
+include('system.php');
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -65,69 +55,137 @@
 					<h2 class="content-title">
 						We found some tasks for you:
 					</h2>
-					<div class="task">
+	
+	
+<?php
+
+$cols = array();	
+$cols['code'] = 'code';
+$cols['speaking'] = 'speaking';
+$cols['leadership'] = 'leadership';
+$cols['teaching_child'] ='teaching_child';
+$cols['translating'] = 'translating';
+$cols['organize'] = 'organize';
+$cols['testing']= 'testing';
+$cols['talk'] = 'talk';
+$cols['teach'] = 'teach';
+$cols['support'] = 'support';
+//$cols['org'] = 'org';
+$rslt = array();
+
+if ($result->num_rows > 0) {
+	
+    // output data of each row
+    while($row = $result->fetch_assoc()) { 
+	
+
+
+	if($row['keywords']!=""){
+		$keywords_arr = explode(',',$row['keywords']);
+	}
+
+    foreach ($keywords_arr as $k){
+		
+		
+		if (in_array($k , $programming_languages_arr)){
+			
+			$rslt[$k] = 1;
+			
+		}elseif(in_array($k , $languages_arr)){
+			
+			$rslt[$k] = 1;
+			
+		}elseif(array_search($k , $cols)!=""){
+			
+			if($userRow[$k]==1){
+				
+				$rslt[$k] = 1;
+			}
+			
+			
+		}elseif($k=='Mozilla'){
+			
+			if($userRow['org']==0){
+				
+				$rslt[$k] = 1;
+			}
+			   
+		}elseif($k=='Open-Source'){
+			
+			if($userRow['org']==1){
+				
+				$rslt[$k] = 1;
+			}
+			
+			   
+		}elseif($k=='All'){
+			
+			if($userRow['org']==2){
+				
+				$rslt[$k] = 1;
+			}			
+			   
+		}
+
+		
+	}
+
+	
+	
+	
+	
+
+if(count($rslt) == count($keywords_arr)) {
+	
+
+
+	
+	
+	?>
+						<div class="task">
 						<h3 class="title">
-							Translation: English to Lithuanian
+							<?php echo $row['name'] ?>
 						</h3>
 						
 						<p class="description">
-							We need someone to translate a wiki page about Mozilla Firefox updates (80 strings) from English to Lithuanian.
+							<?php echo $row['description'] ?>
 						</p>
-						
-						<span class="keywords">
-							<span class="keyword">
-								l10n
-							</span>
-							<span class="keyword">
-								English
-							</span>
-							<span class="keyword">
-								Lithuanian
-							</span>
-						</span>
-						
-						<span class="points">
-							You will gain: <span class="number-points">500 points!</span>
-						</span>
-						<div class="clear"></div>
-						
-						<div class="task-buttons">
-							<button type="button" class="accept-button" name="Accept">Accepts this task</button>
-							<button type="button" class="ignore-button" name="Ignore">Ignore this task</button>
-						</div>
-					</div>
 					
-					<div class="task">
-						<h3 class="title">
-							Translation: English to Lithuanian
-						</h3>
-						
-						<p class="description">
-							We need someone to translate a wiki page about Mozilla Firefox updates (80 strings) from English to Lithuanian.
-						</p>
-						
 						<span class="keywords">
+						<?php foreach($keywords_arr as $key) { ?>
 							<span class="keyword">
-								l10n
+								<?php echo $key ?>
 							</span>
-							<span class="keyword">
-								English
-							</span>
-							<span class="keyword">
-								Lithuanian
-							</span>
+
+						<?php } ?>
 						</span>
 						
 						<span class="points">
-							You will gain: <span class="number-points">500 points!</span>
+							You will gain: <span class="number-points"><?php echo $row['point'] ?> points!</span>
 						</span>
 						<div class="clear"></div>
 						
 						<div class="task-buttons">
-							<button type="button" class="accept-button" name="Accept">Accepts this task</button>
+							<a href="/home.php?para=accept&id=<?php echo $row['id'] ?>" class="completed-button" name="Completed">Accepts this task</a>
 							<button type="button" class="ignore-button" name="Ignore">Ignore this task</button>
 						</div>
 					</div>
+	
+
+		
+    <?php }
+} }else {
+    echo "0 results";
+}
+$conn->close();
+
+ ?>
+
+					
+			
+					
+					
+					
 				</div>
 			</div>
 

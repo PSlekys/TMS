@@ -55,10 +55,16 @@ if ($_POST['Save'] == "1") {
     $name  = $_POST['name'];
     $email = $_POST['email'];
     $pass  = $_POST['pass'];
+	
     if ($_POST['programming-languages'] != "") {
         $programming_languages = implode(',', $_POST['programming-languages']);
     } else {
         $programming_languages = $_POST['programming-languages'];
+    }
+	if ($_POST['languages'] != "") {
+        $languages = implode(',', $_POST['languages']);
+    } else {
+        $languages = $_POST['languages'];
     }
     $programming_languages = implode(',', $_POST['programming-languages']);
     $leadership            = $_POST['leadership'];
@@ -75,11 +81,11 @@ if ($_POST['Save'] == "1") {
     $org                   = $_POST['org'];
     $id                    = $_POST['id'];
     if ($pass == "") {
-        $sql = "UPDATE `users` SET `userName`='$name',`userEmail`='$email',`programming_languages`='$programming_languages',`code`='$code',`speaking`='$speaking',`leadership`='$leadership',`teaching_child`='$teaching_child',`translating`='$translating',`organize`='$organize',`testing`='$testing',`talk`='$talk',`teach`='$teach',`support`='$support',`org`='$org' WHERE userId = '$id'";
+        $sql = "UPDATE `users` SET `userName`='$name',`userEmail`='$email',`programming_languages`='$programming_languages',`languages`='$languages',`code`='$code',`speaking`='$speaking',`leadership`='$leadership',`teaching_child`='$teaching_child',`translating`='$translating',`organize`='$organize',`testing`='$testing',`talk`='$talk',`teach`='$teach',`support`='$support',`org`='$org' WHERE userId = '$id'";
         
     } else {
         $pass = hash('sha256', $pass);
-        $sql  = "UPDATE `users` SET `userName`='$name',`userEmail`='$email',`userPass`='$pass',`programming_languages`='$programming_languages',`code`='$code',`speaking`='$speaking',`leadership`='$leadership',`teaching_child`='$teaching_child',`translating`='$translating',`organize`='$organize',`testing`='$testing',`talk`='$talk',`teach`='$teach',`support`='$support',`org`='$org' WHERE userId = '$id'";
+        $sql  = "UPDATE `users` SET `userName`='$name',`userEmail`='$email',`userPass`='$pass',`programming_languages`='$programming_languages',`languages`='$languages',`code`='$code',`speaking`='$speaking',`leadership`='$leadership',`teaching_child`='$teaching_child',`translating`='$translating',`organize`='$organize',`testing`='$testing',`talk`='$talk',`teach`='$teach',`support`='$support',`org`='$org' WHERE userId = '$id'";
         
     }
     
@@ -259,12 +265,47 @@ $userRow = mysql_fetch_array($res);
 							</div>
 
 							<div class="preference-form-content form-languages">
+														<?php
+							if ($userRow['languages'] != "") {
+								
+								$lngs = array();
+								$sds  = $userRow['languages'];
+								//echo $sd;
+								$lngs = explode(',', $sds);
+								
+							} else {
+								$lngs = array(
+									'no'
+								);
+								
+							}
+							?>  
 								<label class="preference-form-about" for="languages">What languages do you know?</label>
-								<select class="preferences-selection-languages" multiple="">
-									<option value="EN">English</option>
-									<option value="FR">French</option>
-									<option value="LT">Lithuanian</option>
-									<option value="RU">Russian</option>
+								<select name="languages[]" class="preferences-selection-languages" multiple="">
+								<?php 
+								$opts = array(
+  'http'=>array(
+    'method'=>"GET",
+    'header'=>"Accept-language: en\r\n" .
+              "Cookie: foo=bar\r\n"
+  )
+);
+
+$context = stream_context_create($opts);
+								
+								
+								$file = file_get_contents('http://data.okfn.org/data/core/language-codes/r/language-codes.csv', false, $context);
+
+$arr = $csv = array_map('str_getcsv', file('http://data.okfn.org/data/core/language-codes/r/language-codes.csv'));
+
+print_r($arr);
+
+								foreach($arr as $l) { ?>
+								
+									<option <?php if (in_array($l[0], $lngs)){ echo "selected";} ?> value="<?php echo $l[1] ?>"><?php echo $l[1] ?></option>
+
+								
+								<?php } ?>
 								</select>
 							</div>
 							
